@@ -13,7 +13,7 @@ class Document(db.Model):
     type = db.Column(db.String(100), nullable=False)  # book, contract, paper, etc.
     owner_id = db.Column(db.String(36), db.ForeignKey('users.id'), nullable=False)
     content_s3_key = db.Column(db.String(500))
-    metadata = db.Column(db.Text)  # JSON string for metadata
+    document_metadata = db.Column(db.Text)  # JSON string for metadata
     privacy_level = db.Column(db.String(50), default='private')
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
@@ -28,9 +28,9 @@ class Document(db.Model):
     
     def to_dict(self):
         metadata_dict = {}
-        if self.metadata:
+        if self.document_metadata:
             try:
-                metadata_dict = json.loads(self.metadata)
+                metadata_dict = json.loads(self.document_metadata)
             except json.JSONDecodeError:
                 metadata_dict = {}
                 
@@ -48,13 +48,13 @@ class Document(db.Model):
     
     def set_metadata(self, metadata_dict):
         """Set metadata as JSON string"""
-        self.metadata = json.dumps(metadata_dict)
+        self.document_metadata = json.dumps(metadata_dict)
     
     def get_metadata(self):
         """Get metadata as dictionary"""
-        if self.metadata:
+        if self.document_metadata:
             try:
-                return json.loads(self.metadata)
+                return json.loads(self.document_metadata)
             except json.JSONDecodeError:
                 return {}
         return {}
