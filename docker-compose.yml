@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - DATABASE_URL=sqlite:///database/app.db
+    volumes:
+      - ./src:/app/src
+      - ./src/database:/app/src/database
+    depends_on:
+      - redis
+    networks:
+      - ai-writing-network
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - ai-writing-network
+
+  # PostgreSQL for production use
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=ai_writing_platform
+      - POSTGRES_USER=ai_user
+      - POSTGRES_PASSWORD=ai_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ai-writing-network
+
+volumes:
+  redis_data:
+  postgres_data:
+
+networks:
+  ai-writing-network:
+    driver: bridge
+
