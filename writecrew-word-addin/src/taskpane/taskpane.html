@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WriteCrew - AI Writing Assistant</title>
+    
+    <!-- Microsoft Office.js -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    
+    <!-- Fluent UI for native Office look -->
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css">
+    
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" 
+          content="default-src 'self' https://appsforoffice.microsoft.com https://localhost:3000 https://writecrew.com; 
+                   script-src 'self' 'unsafe-inline' https://appsforoffice.microsoft.com; 
+                   style-src 'self' 'unsafe-inline' https://static2.sharepointonline.com;">
+</head>
+
+<body class="ms-Fabric">
+    <!-- WriteCrew Three-Pane Layout Container -->
+    <div id="writecrew-container" class="writecrew-main-container">
+        
+        <!-- Header with WriteCrew Branding -->
+        <div id="writecrew-header" class="writecrew-header">
+            <div class="writecrew-logo">
+                <img src="/assets/icon-32.png" alt="WriteCrew" />
+                <span class="writecrew-title">WriteCrew</span>
+            </div>
+            <div class="writecrew-status">
+                <span id="connection-status" class="status-indicator">●</span>
+                <span id="status-text">Connecting...</span>
+            </div>
+        </div>
+
+        <!-- Main Content Area with Resizable Panes -->
+        <div id="writecrew-main" class="writecrew-main">
+            
+            <!-- Left Pane: AI Chat Interface -->
+            <div id="chat-pane" class="writecrew-pane writecrew-chat-pane">
+                <div class="pane-header">
+                    <h3 class="ms-font-m">AI Chat</h3>
+                    <div class="pane-controls">
+                        <button id="minimize-chat" class="ms-Button ms-Button--icon" title="Minimize">
+                            <i class="ms-Icon ms-Icon--ChevronLeft"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Agent Selector -->
+                <div id="agent-selector" class="agent-selector">
+                    <select id="active-agent" class="ms-Dropdown">
+                        <option value="content_writer">Content Writer</option>
+                        <option value="research_assistant">Research Assistant</option>
+                        <option value="editor">Editor</option>
+                        <option value="quality_checker">Quality Checker</option>
+                    </select>
+                </div>
+                
+                <!-- Chat Messages -->
+                <div id="chat-messages" class="chat-messages">
+                    <div class="welcome-message">
+                        <p class="ms-font-s">👋 Welcome to WriteCrew! I'm your AI writing assistant.</p>
+                        <p class="ms-font-xs">Select an agent above and start chatting to get help with your writing.</p>
+                    </div>
+                </div>
+                
+                <!-- Chat Input -->
+                <div id="chat-input-container" class="chat-input-container">
+                    <div class="ms-TextField">
+                        <input id="chat-input" type="text" class="ms-TextField-field" placeholder="Ask your AI writing crew..." />
+                        <button id="send-message" class="ms-Button ms-Button--primary">
+                            <i class="ms-Icon ms-Icon--Send"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resize Handle between Chat and Suggestions -->
+            <div id="resize-handle-left" class="resize-handle resize-handle-vertical">
+                <div class="resize-grip">⋮⋮⋮</div>
+            </div>
+
+            <!-- Right Pane: Agent Suggestions & Approvals -->
+            <div id="suggestions-pane" class="writecrew-pane writecrew-suggestions-pane">
+                <div class="pane-header">
+                    <h3 class="ms-font-m">Agent Suggestions</h3>
+                    <div class="pane-controls">
+                        <button id="minimize-suggestions" class="ms-Button ms-Button--icon" title="Minimize">
+                            <i class="ms-Icon ms-Icon--ChevronRight"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Permission Level Controls -->
+                <div id="permission-controls" class="permission-controls">
+                    <div class="permission-selector">
+                        <label class="ms-Label">Permission Level:</label>
+                        <div class="permission-levels">
+                            <button id="level-1" class="permission-level active" data-level="1" title="Assistant - Every action requires approval">
+                                <span class="level-indicator">👤</span>
+                                <span class="level-text">Assistant</span>
+                            </button>
+                            <button id="level-2" class="permission-level" data-level="2" title="Collaborative - Paragraph-level approval">
+                                <span class="level-indicator">🤝</span>
+                                <span class="level-text">Collaborative</span>
+                            </button>
+                            <button id="level-3" class="permission-level" data-level="3" title="Semi-Autonomous - Section-level approval">
+                                <span class="level-indicator">⚡</span>
+                                <span class="level-text">Semi-Auto</span>
+                            </button>
+                            <button id="level-4" class="permission-level" data-level="4" title="Fully Autonomous - Minimal oversight">
+                                <span class="level-indicator">🚀</span>
+                                <span class="level-text">Autonomous</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Agents Display -->
+                <div id="active-agents" class="active-agents">
+                    <h4 class="ms-font-s">Active Agents</h4>
+                    <div id="agent-cards" class="agent-cards">
+                        <!-- Agent cards will be populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Suggestions Feed -->
+                <div id="suggestions-feed" class="suggestions-feed">
+                    <div class="no-suggestions">
+                        <p class="ms-font-s">No suggestions yet.</p>
+                        <p class="ms-font-xs">Start chatting with an agent to see suggestions appear here.</p>
+                    </div>
+                </div>
+
+                <!-- Approval Queue -->
+                <div id="approval-queue" class="approval-queue">
+                    <h4 class="ms-font-s">Pending Approvals</h4>
+                    <div id="approval-items" class="approval-items">
+                        <!-- Approval items will be populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer with Usage Stats -->
+        <div id="writecrew-footer" class="writecrew-footer">
+            <div class="usage-stats">
+                <span id="words-generated">Words: 0</span>
+                <span id="cost-estimate">Cost: $0.00</span>
+                <span id="session-time">Time: 00:00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner">
+            <div class="ms-Spinner ms-Spinner--large">
+                <div class="ms-Spinner-circle"></div>
+            </div>
+            <p class="ms-font-m">Initializing WriteCrew...</p>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="error-modal" class="error-modal" style="display: none;">
+        <div class="error-content">
+            <h3 class="ms-font-l">Error</h3>
+            <p id="error-message" class="ms-font-m"></p>
+            <button id="error-close" class="ms-Button ms-Button--primary">OK</button>
+        </div>
+    </div>
+
+</body>
+</html>
+
