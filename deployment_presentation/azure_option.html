@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <style>
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: #FFFFFF;
+        color: #333333;
+        font-family: 'Segoe UI', sans-serif;
+      }
+      .title {
+        color: #1F497D;
+        font-weight: bold;
+      }
+      .accent {
+        color: #4472C4;
+      }
+      .advantage {
+        color: #107C41;
+      }
+      .disadvantage {
+        color: #C00000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container p-10 flex flex-col">
+      <div class="mb-6">
+        <h1 class="title text-4xl mb-2">Microsoft Azure (Recommended)</h1>
+        <p class="text-xl mb-4">Optimal deployment platform for WriteCrew with native Office integration</p>
+      </div>
+      
+      <div class="flex flex-row space-x-8">
+        <div class="w-1/2">
+          <h2 class="title text-2xl mb-4">Architecture</h2>
+          <img src="/home/ubuntu/ai-writing-platform/deployment_presentation/azure_image.png" alt="Azure Architecture" class="mb-4" style="max-height: 240px;">
+          
+          <h3 class="title text-xl mt-4 mb-2">Key Services</h3>
+          <ul class="list-disc pl-6 space-y-1">
+            <li><span class="accent font-bold">Azure Kubernetes Service (AKS):</span> Container orchestration</li>
+            <li><span class="accent font-bold">Azure Front Door:</span> Global load balancing and CDN</li>
+            <li><span class="accent font-bold">PostgreSQL Flexible Server:</span> Managed database</li>
+            <li><span class="accent font-bold">Azure Cache for Redis:</span> High-performance caching</li>
+            <li><span class="accent font-bold">Azure OpenAI Service:</span> Native AI integration</li>
+          </ul>
+        </div>
+        
+        <div class="w-1/2">
+          <h3 class="title text-xl mb-3">Advantages</h3>
+          <ul class="list-none space-y-2 mb-6">
+            <li><i class="fas fa-check-circle advantage mr-2"></i> <span class="font-bold">Native Office Integration:</span> Seamless Microsoft ecosystem</li>
+            <li><i class="fas fa-check-circle advantage mr-2"></i> <span class="font-bold">Azure OpenAI Service:</span> Direct access to GPT-4</li>
+            <li><i class="fas fa-check-circle advantage mr-2"></i> <span class="font-bold">Enterprise Security:</span> Built-in compliance</li>
+            <li><i class="fas fa-check-circle advantage mr-2"></i> <span class="font-bold">Global Scale:</span> Multi-region deployment</li>
+          </ul>
+          
+          <h3 class="title text-xl mb-3">Disadvantages</h3>
+          <ul class="list-none space-y-2 mb-6">
+            <li><i class="fas fa-times-circle disadvantage mr-2"></i> <span class="font-bold">Vendor Lock-in:</span> Tied to Microsoft ecosystem</li>
+            <li><i class="fas fa-times-circle disadvantage mr-2"></i> <span class="font-bold">Learning Curve:</span> Azure-specific knowledge required</li>
+            <li><i class="fas fa-times-circle disadvantage mr-2"></i> <span class="font-bold">Cost Complexity:</span> Complex pricing model</li>
+          </ul>
+          
+          <h3 class="title text-xl mb-3">Cost Analysis (Monthly)</h3>
+          <div class="bg-gray-50 p-3 rounded">
+            <p class="mb-1"><span class="accent font-bold">Production Environment:</span> 1000 concurrent users</p>
+            <p class="mb-1">AKS Cluster (3 regions): $2,400/month</p>
+            <p class="mb-1">PostgreSQL + Redis + Storage: $1,400/month</p>
+            <p class="mb-1">Azure OpenAI + Networking: $1,750/month</p>
+            <p class="mb-1">Monitoring + Front Door: $450/month</p>
+            <p class="font-bold mt-2">Total: ~$6,000/month</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <style>
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: #FFFFFF;
+        color: #333333;
+        font-family: 'Segoe UI', sans-serif;
+      }
+      .title {
+        color: #1F497D;
+        font-weight: bold;
+      }
+      .accent {
+        color: #4472C4;
+      }
+      .advantage {
+        color: #107C41;
+      }
+      .disadvantage {
+        color: #C00000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container p-10 flex flex-col">
+      <div class="mb-6">
+        <h1 class="title text-4xl mb-2">Google Cloud Platform Option</h1>
+        <p class="text-xl mb-4">Strong AI/ML capabilities with competitive pricing</p>
+      </div>
+      
+      <div class="flex flex-row space-x-8">
+        <div class="w-1/2">
+          <h2 class="title text-2xl mb-4">Architecture</h2>
+          <img src="/home/ubuntu/ai-writing-platform/deployment_presentation/gcp_image.png" alt="GCP Architecture" class="mb-4" style="max-height: 240px;">
+          
+          <h3 class="title text-xl mt-4 mb-2">Key Services</h3>
+          <ul class="list-disc pl-6 space-y-1">
+            <li><span class="accent font-bold">Google Kubernetes Engine (GKE):</span> Kubernetes service</li>
+            <li><span class="accent font-bold">Cloud CDN:</span> Global content delivery</li>
+            <li><span class="accent font-bold">Cloud SQL PostgreSQL:</span> Managed database</li>
+            <li><span class="accent font-bold">Memorystore:</span> Redis caching</li>
+            <li><span class="accent font-bold">Vertex AI:</span> AI/ML platform</li>
+            <li><span class="accent font-bold">Cloud Storage:</span> Object storage</li>
+          </ul>
+        </div>
+        
+        <div class="w-1/2">
+          <h3 class="title text-xl mb-3">Advantages</h3>
+          <ul class="list-none space-y-2 mb-6">
+            <li><i class="fas fa-check-circle advantage mr-2"></i> <span class="font-bold">AI/ML Excellence:</span> Leading AI/ML platform</li>
+            <li><i class="fas fa-check-circle advantage mr-2"></i> <span class="font-bold">Kubernetes Native:</span> Best-in-class GKE</li>
+            <li><i class="fas fa-check-circle advantage mr-2"></i> <span class="font-bold">Competitive Pricing:</span> Often 20-30% cheaper</li>
+            <li><i class="fas fa-check-circle advantage mr-2"></i> <span class="font-bold">Sustainability:</span> Carbon-neutral cloud</li>
+          </ul>
+          
+          <h3 class="title text-xl mb-3">Disadvantages</h3>
+          <ul class="list-none space-y-2 mb-6">
+            <li><i class="fas fa-times-circle disadvantage mr-2"></i> <span class="font-bold">Office Integration:</span> Limited Microsoft ecosystem integration</li>
+            <li><i class="fas fa-times-circle disadvantage mr-2"></i> <span class="font-bold">Enterprise Adoption:</span> Smaller enterprise market share</li>
+            <li><i class="fas fa-times-circle disadvantage mr-2"></i> <span class="font-bold">Support:</span> Less enterprise support compared to AWS/Azure</li>
+          </ul>
+          
+          <h3 class="title text-xl mb-3">Cost Analysis (Monthly)</h3>
+          <div class="bg-gray-50 p-3 rounded">
+            <p class="mb-1"><span class="accent font-bold">Production Environment:</span> 1000 concurrent users</p>
+            <p class="mb-1">GKE Clusters (3 regions): $1,900/month</p>
+            <p class="mb-1">Cloud SQL PostgreSQL + Memorystore: $1,130/month</p>
+            <p class="mb-1">Vertex AI + Networking: $1,800/month</p>
+            <p class="mb-1">Storage + CDN + Monitoring: $470/month</p>
+            <p class="font-bold mt-2">Total: ~$5,300/month</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

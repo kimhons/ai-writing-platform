@@ -247,7 +247,7 @@ class RealtimeCommunicationService {
             const messageString = JSON.stringify(message);
             this.websocket.send(messageString);
             
-            this.metrics.messagesS ent++;
+            this.metrics.messagesSent++;
             console.log(`📤 Message sent: ${message.type}`, message);
             
             this.emit('messageSent', { message });
@@ -505,9 +505,9 @@ class RealtimeCommunicationService {
         }
         
         // Calculate stability (successful messages / total attempts)
-        const totalMessages = this.metrics.messagesS ent + this.metrics.errors;
+        const totalMessages = this.metrics.messagesSent + this.metrics.errors;
         if (totalMessages > 0) {
-            this.connectionQuality.stability = this.metrics.messagesS ent / totalMessages;
+            this.connectionQuality.stability = this.metrics.messagesSent / totalMessages;
         }
         
         // Emit quality update

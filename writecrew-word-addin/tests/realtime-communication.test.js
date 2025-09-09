@@ -3,6 +3,17 @@
  * Includes unit tests, integration tests, WebSocket mocking, and performance tests
  */
 
+// Mock browser APIs for Node.js environment
+global.localStorage = {
+    getItem: (key) => {
+        if (key === 'writecrew_auth_token') return 'mock_auth_token_12345';
+        return null;
+    },
+    setItem: (key, value) => {},
+    removeItem: (key) => {},
+    clear: () => {}
+};
+
 // Test dependencies
 const RealtimeCommunicationService = require('../src/services/realtime-communication');
 

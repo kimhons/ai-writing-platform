@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <style>
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: #FFFFFF;
+        color: #333333;
+        font-family: 'Segoe UI', sans-serif;
+      }
+      .title {
+        color: #1F497D;
+        font-weight: bold;
+      }
+      .accent {
+        color: #4472C4;
+      }
+      .requirement-box {
+        border-left: 4px solid #4472C4;
+        background-color: #F8F9FA;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container p-10 flex flex-col">
+      <div class="mb-6">
+        <h1 class="title text-4xl mb-4">Deployment Requirements & Objectives</h1>
+        <p class="text-xl mb-2">WriteCrew Cloud-Native SaaS Platform</p>
+      </div>
+      
+      <div class="flex flex-row space-x-8 mb-8">
+        <div class="w-1/2">
+          <h2 class="title text-2xl mb-4">Technical Requirements</h2>
+          <div class="space-y-3">
+            <div class="requirement-box p-3">
+              <p><span class="accent font-bold">High Availability:</span> 99.9% uptime SLA</p>
+            </div>
+            <div class="requirement-box p-3">
+              <p><span class="accent font-bold">Scalability:</span> Support 1000+ concurrent users initially, scale to 10,000+</p>
+            </div>
+            <div class="requirement-box p-3">
+              <p><span class="accent font-bold">Performance:</span> <3 second response times globally</p>
+            </div>
+            <div class="requirement-box p-3">
+              <p><span class="accent font-bold">Security:</span> Enterprise-grade security and compliance</p>
+            </div>
+            <div class="requirement-box p-3">
+              <p><span class="accent font-bold">Global Reach:</span> Multi-region deployment capability</p>
+            </div>
+            <div class="requirement-box p-3">
+              <p><span class="accent font-bold">Office Integration:</span> Reliable Microsoft Office Add-in hosting</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="w-1/2">
+          <h2 class="title text-2xl mb-4">Business Requirements</h2>
+          <div class="space-y-3">
+            <div class="requirement-box p-3">
+              <p><span class="accent font-bold">Cost Efficiency:</span> Optimize operational costs</p>
+            </div>
+            <div class="requirement-box p-3">
+              <p><span class="accent font-bold">Time to Market:</span> Fast deployment and iteration</p>
+            </div>
+            <div class="requirement-box p-3">
+              <p><span class="accent font-bold">Compliance:</span> GDPR, SOC 2, enterprise compliance</p>
+            </div>
+            <div class="requirement-box p-3">
+              <p><span class="accent font-bold">Support:</span> 24/7 monitoring and support capability</p>
+            </div>
+            <div class="requirement-box p-3">
+              <p><span class="accent font-bold">Scalability:</span> Pay-as-you-grow cost model</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex justify-center mt-4">
+        <img src="/home/ubuntu/ai-writing-platform/deployment_presentation/overview_image.png" alt="Cloud Architecture Overview" class="max-h-240 object-contain" style="max-height: 240px;">
+      </div>
+    </div>
+  </body>
+</html>
+

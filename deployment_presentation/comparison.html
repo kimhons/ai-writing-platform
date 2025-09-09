@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <style>
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: #FFFFFF;
+        color: #333333;
+        font-family: 'Segoe UI', sans-serif;
+      }
+      .title {
+        color: #1F497D;
+        font-weight: bold;
+      }
+      .accent {
+        color: #4472C4;
+      }
+      .table-header {
+        background-color: #1F497D;
+        color: white;
+      }
+      .azure-color {
+        background-color: rgba(68, 114, 196, 0.7);
+      }
+      .aws-color {
+        background-color: rgba(255, 153, 0, 0.7);
+      }
+      .gcp-color {
+        background-color: rgba(52, 168, 83, 0.7);
+      }
+      .multi-color {
+        background-color: rgba(156, 39, 176, 0.7);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container p-10 flex flex-col">
+      <div class="mb-6">
+        <h1 class="title text-4xl mb-2">Deployment Options Comparison</h1>
+        <p class="text-xl mb-4">Side-by-side comparison of all deployment options with ratings for key criteria</p>
+      </div>
+      
+      <div class="flex flex-row space-x-8">
+        <div class="w-1/2">
+          <div style="height: 400px;">
+            <canvas id="comparisonChart"></canvas>
+          </div>
+          <div class="flex justify-center mt-4 space-x-6">
+            <div class="flex items-center">
+              <div class="w-4 h-4 azure-color mr-2"></div>
+              <span>Azure</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-4 h-4 aws-color mr-2"></div>
+              <span>AWS</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-4 h-4 gcp-color mr-2"></div>
+              <span>GCP</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-4 h-4 multi-color mr-2"></div>
+              <span>Multi-Cloud</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="w-1/2">
+          <table class="w-full border-collapse">
+            <thead>
+              <tr class="table-header">
+                <th class="border p-2 text-left">Criteria</th>
+                <th class="border p-2 text-center">Azure</th>
+                <th class="border p-2 text-center">AWS</th>
+                <th class="border p-2 text-center">GCP</th>
+                <th class="border p-2 text-center">Multi-Cloud</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-gray-50">
+                <td class="border p-2 font-medium">Office Integration</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐</td>
+              </tr>
+              <tr>
+                <td class="border p-2 font-medium">AI Services</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐⭐</td>
+              </tr>
+              <tr class="bg-gray-50">
+                <td class="border p-2 font-medium">Enterprise Features</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐</td>
+              </tr>
+              <tr>
+                <td class="border p-2 font-medium">Cost Efficiency</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐</td>
+              </tr>
+              <tr class="bg-gray-50">
+                <td class="border p-2 font-medium">Complexity</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐</td>
+              </tr>
+              <tr>
+                <td class="border p-2 font-medium">Time to Market</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐</td>
+              </tr>
+              <tr class="bg-gray-50">
+                <td class="border p-2 font-medium">Scalability</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐</td>
+              </tr>
+              <tr>
+                <td class="border p-2 font-medium">Support</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐⭐</td>
+                <td class="border p-2 text-center">⭐⭐⭐</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="text-sm mt-4 text-gray-600">Note: Ratings based on comprehensive analysis of each platform's capabilities for WriteCrew's specific requirements.</p>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('comparisonChart').getContext('2d');
+        
+        const data = {
+          labels: [
+            'Office Integration',
+            'AI Services',
+            'Enterprise Features',
+            'Cost Efficiency',
+            'Complexity',
+            'Time to Market',
+            'Scalability',
+            'Support'
+          ],
+          datasets: [
+            {
+              label: 'Azure',
+              data: [5, 5, 5, 4, 4, 5, 5, 5],
+              backgroundColor: 'rgba(68, 114, 196, 0.2)',
+              borderColor: 'rgba(68, 114, 196, 0.7)',
+              pointBackgroundColor: 'rgba(68, 114, 196, 1)',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: 'rgba(68, 114, 196, 1)'
+            },
+            {
+              label: 'AWS',
+              data: [3, 4, 5, 3, 3, 4, 5, 5],
+              backgroundColor: 'rgba(255, 153, 0, 0.2)',
+              borderColor: 'rgba(255, 153, 0, 0.7)',
+              pointBackgroundColor: 'rgba(255, 153, 0, 1)',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: 'rgba(255, 153, 0, 1)'
+            },
+            {
+              label: 'GCP',
+              data: [2, 5, 4, 5, 4, 4, 5, 4],
+              backgroundColor: 'rgba(52, 168, 83, 0.2)',
+              borderColor: 'rgba(52, 168, 83, 0.7)',
+              pointBackgroundColor: 'rgba(52, 168, 83, 1)',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: 'rgba(52, 168, 83, 1)'
+            },
+            {
+              label: 'Multi-Cloud',
+              data: [4, 5, 4, 3, 2, 2, 4, 3],
+              backgroundColor: 'rgba(156, 39, 176, 0.2)',
+              borderColor: 'rgba(156, 39, 176, 0.7)',
+              pointBackgroundColor: 'rgba(156, 39, 176, 1)',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: 'rgba(156, 39, 176, 1)'
+            }
+          ]
+        };
+        
+        const config = {
+          type: 'radar',
+          data: data,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              r: {
+                min: 0,
+                max: 5,
+                ticks: {
+                  stepSize: 1
+                }
+              }
+            },
+            plugins: {
+              legend: {
+                display: false
+              }
+            }
+          }
+        };
+        
+        new Chart(ctx, config);
+      });
+    </script>
+  </body>
+</html>
+
